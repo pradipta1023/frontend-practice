@@ -23,6 +23,9 @@ const createResponse = async (path) => {
 const createSuccessResponse = async (path) =>
   [`HTTP/1.1 200 ok`, ...(await createResponse(path))].join("\r\n");
 
+const write = async (conn, path) =>
+  await conn.write(encoder.encode(await createSuccessResponse(path)));
+
 const handleRequest = async (conn) => {
   const bytesRead = await conn.read(buffer);
   const request = decoder.decode(buffer.subarray(0, bytesRead));
@@ -30,9 +33,11 @@ const handleRequest = async (conn) => {
   const [method, path, protocol] = requestLine.split(" ");
   switch (path) {
     case "/":
-      await conn.write(
-        encoder.encode(await createSuccessResponse("./html/home.html")),
-      );
+    case "/home":
+      await write(conn, "./HTML/home.html");
+      break;
+    case "/login":
+      await write(conn, "./HTML/login.html");
       break;
     default:
       break;
