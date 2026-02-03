@@ -6,11 +6,37 @@ const buffer = new Uint8Array(1024);
 const decoder = new TextDecoder();
 const encoder = new TextEncoder();
 
+const craeteHeaders = (headers) =>
+  Object.entries(headers).map((header) => header.join(":")).join("\r\n");
+
+const createResponse = async (path) => {
+  const content = await Deno.readTextFile(path);
+
+  const headers = {
+    "Content-Type": "text/html",
+    "Content-Length": content.length,
+  };
+
+  return [craeteHeaders(headers), "", content];
+};
+
+const createSuccessResponse = async (path) =>
+  [`HTTP/1.1 200 ok`, ...(await createResponse(path))].join("\r\n");
+
 const handleRequest = async (conn) => {
   const bytesRead = await conn.read(buffer);
   const request = decoder.decode(buffer.subarray(0, bytesRead));
   const [requestLine] = request.split("\r\n");
   const [method, path, protocol] = requestLine.split(" ");
+  switch (path) {
+    case "/":
+      await conn.write(
+        encoder.encode(await createSuccessResponse("./html/home.html")),
+      );
+      break;
+    default:
+      break;
+  }
   console.log({ method, path, protocol });
 };
 
