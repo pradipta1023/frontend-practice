@@ -1,0 +1,24 @@
+body {
+  font-family: sans-serif;
+  line-height: 1.5em;
+  background-color: beige;
+}
+h1 {
+  font-size: 27px;
+  font-weight: 500;
+}
+p {
+  color: #555;
+}
+h2 {
+  font-size: 23px;
+  font-weight: 400;
+}
+
+h4 {
+  font-weight: 500;
+}
+
+h6 {
+  font-size: 2px;
+}

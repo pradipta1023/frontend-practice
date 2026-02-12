@@ -1,0 +1,24 @@
+.upper {
+  background-color: #ff9933;
+}
+
+.middle {
+  background-color: white;
+}
+
+.lower {
+  background-color: green;
+}
+
+.flag {
+  height: 298px;
+  width: 100%;
+  /* border-radius: 298px; */
+}
+
+#ashok-chakra {
+  height: 298px;
+  padding-left: 40%;
+  /* padding-top: 1.5%; */
+  /* margin: 0 auto; */
+}

@@ -1,0 +1,14 @@
+* {
+  margin: 0px;
+}
+
+body {
+  background-color: black;
+}
+
+.terminal-works {
+  height: 500px;
+  background-color: rgba(56, 54, 54, 0.803);
+  width: 60%;
+  margin: 10px auto;
+}
